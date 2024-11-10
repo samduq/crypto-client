@@ -1,6 +1,6 @@
 package com.cryptoclient.window;
 
-import com.cryptoclient.vues.Login;
+import com.cryptoclient.vues.index.Login;
 
 import javax.swing.*;
 import java.awt.*;

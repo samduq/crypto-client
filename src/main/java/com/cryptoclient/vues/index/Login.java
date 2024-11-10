@@ -1,9 +1,11 @@
-package com.cryptoclient.vues;
+package com.cryptoclient.vues.index;
+
+import com.cryptoclient.vues.Vue;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Login extends JPanel {
+public class Login extends Vue {
     public Login(int width, int height) {
         super();
         GridLayout layout = new GridLayout(3, 1);
@@ -16,7 +18,8 @@ public class Login extends JPanel {
         this.loadComponents();
     }
 
-    private void loadComponents() {
+    @Override
+    public void loadComponents() {
         // Username fields
         JLabel usernameLabel = new JLabel("Username");
         JTextField usernameField = new JTextField();
