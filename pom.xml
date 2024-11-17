@@ -21,6 +21,13 @@
             <artifactId>json</artifactId>
             <version>20240303</version>
         </dependency>
+        <dependency>
+            <!-- Doc link: https://www.jfree.org/jfreechart/api/javadoc/index.html -->
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+
     </dependencies>
 
 </project>
