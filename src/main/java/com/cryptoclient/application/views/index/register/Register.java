@@ -1,29 +1,41 @@
-package com.cryptoclient.application.views.login;
+package com.cryptoclient.application.views.index.register;
 
 import com.cryptoclient.application.views.View;
-import com.cryptoclient.application.views.login.components.PasswordField;
-import com.cryptoclient.application.views.login.components.UsernameField;
+import com.cryptoclient.application.views.index.components.PasswordField;
+import com.cryptoclient.application.views.index.components.SubmitButton;
+import com.cryptoclient.application.views.index.components.UsernameField;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Login extends View {
-
+public class Register extends View {
     private int textSize;
     private int inputColumns;
 
     private JLabel title;
     private UsernameField usernameField;
     private PasswordField passwordField;
-    private JButton loginButton;
+    private PasswordField confirmPasswordField;
+    private JLabel loginLabel;
+    private JButton registerButton;
 
-    public Login() {
+    public Register() {
         this.textSize = 23;
-        this.inputColumns = 11;
-        this.title = new JLabel("Bienvenue !");
+        this.inputColumns = 16;
+        this.title = new JLabel("Inscription");
         this.usernameField = new UsernameField("Pseudo", this.getInputColumns(), this.getTextSize());
         this.passwordField = new PasswordField("Mot de passe", this.getInputColumns(), this.getTextSize());
-        this.loginButton = new JButton("Se connecter");
+        this.confirmPasswordField = new PasswordField("Vérification du mot de passe", this.getInputColumns(), this.getTextSize());
+        this.loginLabel = new JLabel("Retourner sur la page de connection");
+        this.registerButton = new SubmitButton("S'inscrire !", this.getTextSize());
+    }
+
+    public JLabel getLoginLabel() {
+        return this.loginLabel;
+    }
+
+    public void setLoginLabel(JLabel createAccountLabel) {
+        this.loginLabel = createAccountLabel;
     }
 
     public int getTextSize() {
@@ -46,8 +58,16 @@ public class Login extends View {
         return this.passwordField;
     }
 
-    public JButton getLoginButton() {
-        return this.loginButton;
+    public PasswordField getConfirmPasswordField() {
+        return this.confirmPasswordField;
+    }
+
+    public void setConfirmPasswordField(PasswordField confirmPasswordField) {
+        this.confirmPasswordField = confirmPasswordField;
+    }
+
+    public JButton getRegisterButton() {
+        return this.registerButton;
     }
 
     public void setTextSize(int textSize) {
@@ -70,8 +90,8 @@ public class Login extends View {
         this.passwordField = passwordField;
     }
 
-    public void setLoginButton(JButton loginButton) {
-        this.loginButton = loginButton;
+    public void setLoginButton(JButton registerButton) {
+        this.registerButton = registerButton;
     }
 
     @Override
@@ -97,14 +117,21 @@ public class Login extends View {
         gbc.insets = new Insets(0, 0, 20, 0);
         this.add(this.getPasswordField(), gbc);
 
-        this.getLoginButton().setFont(new Font("Arial", Font.PLAIN, this.getTextSize()));
-        this.getLoginButton().setForeground(Color.WHITE);
-        this.getLoginButton().setBackground(new Color(244, 69, 46));
-        this.getLoginButton().setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        this.getLoginButton().setFocusPainted(false);
-        this.getLoginButton().setCursor(new Cursor(Cursor.HAND_CURSOR));
         gbc.gridx = 1;
         gbc.gridy = 3;
-        this.add(this.getLoginButton(), gbc);
+        gbc.insets = new Insets(0, 0, 10, 0);
+        this.add(this.getConfirmPasswordField(), gbc);
+
+        this.getLoginLabel().setFont(new Font("Arial", Font.PLAIN, 17));
+        this.getLoginLabel().setForeground(new Color(133, 122, 129));
+        this.getLoginLabel().setCursor(new Cursor(Cursor.HAND_CURSOR));
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.insets = new Insets(0, 0, 20, 0);
+        this.add(this.getLoginLabel(), gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        this.add(this.getRegisterButton(), gbc);
     }
 }

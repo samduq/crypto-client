@@ -1,4 +1,4 @@
-package com.cryptoclient.application.views.login.components;
+package com.cryptoclient.application.views.index.components;
 
 import javax.swing.border.AbstractBorder;
 

@@ -1,6 +1,7 @@
 package com.cryptoclient.application.views;
 
-import com.cryptoclient.application.views.login.Login;
+import com.cryptoclient.application.views.index.login.Login;
+import com.cryptoclient.application.views.index.register.Register;
 import com.cryptoclient.config.Configuration;
 import com.cryptoclient.application.Application;
 
@@ -19,6 +20,7 @@ public class ViewManager {
 
     private void loadViews() {
         this.getViews().put(Configuration.VIEW_LOGIN, new Login());
+        this.getViews().put(Configuration.VIEW_REGISTER, new Register());
     }
 
     private Application getApplication() {
@@ -30,7 +32,18 @@ public class ViewManager {
     }
 
     public void displayView(String viewName) {
+
+        // Make all views invisible
+        for (View view : this.getViews().values()) {
+            if (view.isVisible()) {
+                view.setVisible(false);
+            }
+        }
+
+        // Empty content pane
         this.getApplication().getContentPane().removeAll();
+
+
         if (this.getViews().containsKey(viewName)) {
             // Get the view
             View view = this.getViews().get(viewName);

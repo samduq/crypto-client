@@ -1,4 +1,4 @@
-package com.cryptoclient.application.views.login.components;
+package com.cryptoclient.application.views.index.components;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,8 +17,6 @@ public class UsernameField extends JTextField {
         this.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         this.setForeground(placeHolderColor);
         this.setText(placeHolder);
-
-        // Ajoutez un rayon d'arrondi au bord// 10 est le rayon du coin arrondi
 
         this.addFocusListener(new FocusAdapter() {
             @Override

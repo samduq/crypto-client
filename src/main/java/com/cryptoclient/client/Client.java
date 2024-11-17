@@ -44,6 +44,7 @@ public class Client implements IClient {
 
             // Events listener component
             this.setEventsListener(new EventsListener(this.getApplication(), this.getConnection()));
+            this.listenUIEvents();
         });
     }
 
@@ -137,7 +138,7 @@ public class Client implements IClient {
 
     @Override
     public void listenUIEvents() {
-
+        this.getEventsListener().listenAll();
     }
 
     @Override
