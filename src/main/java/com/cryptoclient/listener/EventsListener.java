@@ -2,12 +2,11 @@ package com.cryptoclient.listener;
 
 import com.cryptoclient.application.Application;
 import com.cryptoclient.application.views.index.login.Login;
+import com.cryptoclient.application.views.index.register.Register;
 import com.cryptoclient.config.Configuration;
 import com.cryptoclient.listener.login.LoginListener;
 import com.cryptoclient.listener.register.RegisterListener;
 import com.cryptoclient.networking.Connection;
-import com.cryptoclient.networking.packets.headers.OutgoingHeaders;
-import org.json.JSONObject;
 
 public class EventsListener {
 
@@ -15,8 +14,8 @@ public class EventsListener {
     private final Connection connection;
 
     // Define listeners
-    private LoginListener loginListener;
-    private RegisterListener registerListener;
+    private ViewListener<Login> loginListener;
+    private ViewListener<Register> registerListener;
 
     public EventsListener(Application application, Connection connection) {
         this.application = application;
@@ -25,46 +24,35 @@ public class EventsListener {
 
     public void listenAll() {
         // listen login
-        this.setLoginListener(new LoginListener(this.getApplication(), this.getConnection()));
+        this.setLoginListener(new LoginListener(this.getApplication(), this.getConnection(), (Login) this.getApplication().getViewManager().getViews().get(Configuration.VIEW_LOGIN)));
         this.getLoginListener().listen();
 
         // listen register
-        this.setRegisterListener(new RegisterListener(this.getApplication(), this.getConnection()));
+        this.setRegisterListener(new RegisterListener(this.getApplication(), this.getConnection(), (Register) this.getApplication().getViewManager().getViews().get(Configuration.VIEW_REGISTER)));
         this.getRegisterListener().listen();
     }
 
-    public RegisterListener getRegisterListener() {
+    private ViewListener<Register> getRegisterListener() {
         return this.registerListener;
     }
 
-    public void setRegisterListener(RegisterListener registerListener) {
+    private void setRegisterListener(ViewListener<Register> registerListener) {
         this.registerListener = registerListener;
     }
 
-    public LoginListener getLoginListener() {
+    private ViewListener<Login> getLoginListener() {
         return this.loginListener;
     }
 
-    public void setLoginListener(LoginListener loginListener) {
+    private void setLoginListener(ViewListener<Login> loginListener) {
         this.loginListener = loginListener;
     }
 
-    public Connection getConnection() {
+    private Connection getConnection() {
         return this.connection;
     }
 
-    public Application getApplication() {
+    private Application getApplication() {
         return this.application;
-    }
-
-    public void listenLoginSubmit() {
-        Login login = (Login) this.getApplication().getViewManager().getViews().get(Configuration.VIEW_LOGIN);
-        login.getLoginButton().addActionListener(e -> {
-            JSONObject packet = new JSONObject();
-            packet.put("header", OutgoingHeaders.LOGIN_SUBMIT_REQUEST);
-            packet.put("username", login.getUsernameField().getText());
-            packet.put("password", login.getPasswordField().getText());
-            this.getConnection().sendPacket(packet);
-        });
     }
 }
