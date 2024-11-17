@@ -1,7 +1,7 @@
 package com.cryptoclient.listener;
 
 import com.cryptoclient.application.Application;
-import com.cryptoclient.application.views.index.Login;
+import com.cryptoclient.application.views.login.Login;
 import com.cryptoclient.config.Configuration;
 import com.cryptoclient.networking.Connection;
 import com.cryptoclient.networking.packets.headers.OutgoingHeaders;
@@ -29,7 +29,7 @@ public class EventsListener {
 
     public void listenLoginSubmit() {
         Login login = (Login) this.getApplication().getViewManager().getViews().get(Configuration.VIEW_LOGIN);
-        login.getButton().addActionListener(e -> {
+        login.getLoginButton().addActionListener(e -> {
             JSONObject packet = new JSONObject();
             packet.put("header", OutgoingHeaders.LOGIN_SUBMIT_REQUEST);
             packet.put("username", login.getUsernameField().getText());

@@ -12,9 +12,6 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.Socket;
 
-/**
- * Controller
- */
 public class Client implements IClient {
 
     // GUI component
@@ -36,6 +33,7 @@ public class Client implements IClient {
         SwingUtilities.invokeLater(() -> {
             // Launch the graphical user interface (GUI) component
             this.setApplication(new Application(Configuration.WINDOW_TITLE, Configuration.WINDOW_WIDTH, Configuration.WINDOW_HEIGHT, Configuration.WINDOW_RESIZABLE));
+            this.getApplication().getViewManager().displayView(Configuration.VIEW_LOGIN);
             this.getApplication().setVisible(true);
 
             // Connection component
@@ -46,9 +44,6 @@ public class Client implements IClient {
 
             // Events listener component
             this.setEventsListener(new EventsListener(this.getApplication(), this.getConnection()));
-
-            // Display index
-            this.getApplication().getViewManager().displayLoginView();
         });
     }
 

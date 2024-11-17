@@ -14,13 +14,37 @@ public class Application extends JFrame {
 
         this.setTitle(title);
         this.setSize(width, height);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.setLayout(null);
-        this.getContentPane().setBackground(new Color(255, 229, 172));
         this.setResizable(resizable);
-
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setViewManager(new ViewManager(this));
+
+        this.setFocusTraversalPolicy(new FocusTraversalPolicy() {
+            @Override
+            public Component getComponentAfter(Container aContainer, Component aComponent) {
+                return null;
+            }
+
+            @Override
+            public Component getComponentBefore(Container aContainer, Component aComponent) {
+                return null;
+            }
+
+            @Override
+            public Component getFirstComponent(Container aContainer) {
+                return null;
+            }
+
+            @Override
+            public Component getLastComponent(Container aContainer) {
+                return null;
+            }
+
+            @Override
+            public Component getDefaultComponent(Container aContainer) {
+                return null;
+            }
+        });
     }
 
     public void setViewManager(ViewManager viewManager) {

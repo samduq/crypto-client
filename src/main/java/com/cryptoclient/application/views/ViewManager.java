@@ -1,6 +1,6 @@
 package com.cryptoclient.application.views;
 
-import com.cryptoclient.application.views.index.Login;
+import com.cryptoclient.application.views.login.Login;
 import com.cryptoclient.config.Configuration;
 import com.cryptoclient.application.Application;
 
@@ -29,30 +29,15 @@ public class ViewManager {
         return this.views;
     }
 
-//    public void loadLoginView() {
-//        // Define the size of the view
-//        int width = 500;
-//        int height = 160;
-//
-//        // Creation of the view
-//        //Login loginVue = new Login(this.getApplication().getConnection(), width, height);
-//        //loginVue.setOpaque(false);
-//
-//        // Center it
-//        //loginVue.setBounds((this.getApplication().getWidth() - width) / 2, (this.getApplication().getHeight() - height) / 2, width, height);
-//
-//        // Add it to the registered view
-//        //this.getViews().put(Configuration.VIEW_LOGIN, loginVue);
-//    }
-
-    public void displayLoginView() {
-        if (this.getViews().containsKey(Configuration.VIEW_LOGIN)) {
-            View loginView = this.getViews().get(Configuration.VIEW_LOGIN);
-            loginView.setOpaque(false);
-            loginView.setBounds((this.getApplication().getWidth() - loginView.getWidth()) / 2, (this.getApplication().getHeight() - loginView.getHeight()) / 2, loginView.getWidth(), loginView.getHeight());
-            this.getViews().get(Configuration.VIEW_LOGIN).setVisible(true);
-            // Add it to the content pane of the application
-            this.getApplication().getContentPane().add(this.getViews().get(Configuration.VIEW_LOGIN));
+    public void displayView(String viewName) {
+        this.getApplication().getContentPane().removeAll();
+        if (this.getViews().containsKey(viewName)) {
+            // Get the view
+            View view = this.getViews().get(viewName);
+            view.loadComponents();
+            // Show it
+            this.getApplication().getContentPane().add(view);
+            view.setVisible(true);
         }
     }
 }
