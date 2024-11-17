@@ -15,6 +15,9 @@ public class LoginResponse extends Event {
 
         if ((boolean) packet.get("loginSuccess")) {
             if (packet.has("cryptoNames")) {
+                // Load necessary data to show the dashboard
+                // TODO: we can load ALL data in components one time only
+
                 JSONArray cryptoList = (JSONArray) packet.get("cryptoNames");
                 DefaultListModel<String> cryptoNames = new DefaultListModel<>();
 
