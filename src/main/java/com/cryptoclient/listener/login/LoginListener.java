@@ -39,6 +39,7 @@ public class LoginListener extends ViewListener<Login> {
             packet.put("username", this.getView().getUsernameField().getText());
             packet.put("password", this.getView().getPasswordField().getText()); // TODO: getText() is deprecated
             this.getConnection().sendPacket(packet);
+            this.getApp().getViewManager().displayView(Configuration.VIEW_LOADING);
         });
     }
 }

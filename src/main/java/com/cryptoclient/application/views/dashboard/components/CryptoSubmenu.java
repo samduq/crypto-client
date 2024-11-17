@@ -12,7 +12,7 @@ public class CryptoSubmenu extends JPanel {
     public CryptoSubmenu(DefaultListModel<String> cryptocurrenciesName) {
         this.setCryptocurrenciesName(cryptocurrenciesName);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.loadItems();
+        //this.loadItems();
     }
 
     public JScrollPane getListScroller() {
@@ -39,7 +39,7 @@ public class CryptoSubmenu extends JPanel {
         this.getCryptocurrenciesItems().setForeground(Color.BLACK);
 
         this.setListScroller(new JScrollPane(this.getCryptocurrenciesItems()));
-        this.getListScroller().setPreferredSize(new Dimension(250, 0));
+        //this.getListScroller().setPreferredSize(new Dimension(250, 0));
         this.add(this.getListScroller());
     }
 

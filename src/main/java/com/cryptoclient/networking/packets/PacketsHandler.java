@@ -1,6 +1,8 @@
 package com.cryptoclient.networking.packets;
 
 import com.cryptoclient.application.Application;
+import com.cryptoclient.networking.packets.authentification.LoginResponse;
+import com.cryptoclient.networking.packets.headers.IncomingHeaders;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -21,7 +23,7 @@ public class PacketsHandler {
     }
 
     private void registerEvents() {
-        //this.getEvents().put(1, new LoginEvent());
+        this.getEvents().put(IncomingHeaders.LOGIN_RESPONSE, new LoginResponse());
     }
 
     public HashMap<Integer, Event> getEvents() {

@@ -3,6 +3,7 @@ package com.cryptoclient.application.views;
 import com.cryptoclient.application.views.dashboard.Dashboard;
 import com.cryptoclient.application.views.index.login.Login;
 import com.cryptoclient.application.views.index.register.Register;
+import com.cryptoclient.application.views.loading.Loading;
 import com.cryptoclient.config.Configuration;
 import com.cryptoclient.application.Application;
 
@@ -23,6 +24,7 @@ public class ViewManager {
         this.getViews().put(Configuration.VIEW_LOGIN, new Login());
         this.getViews().put(Configuration.VIEW_REGISTER, new Register());
         this.getViews().put(Configuration.VIEW_DASHBOARD, new Dashboard());
+        this.getViews().put(Configuration.VIEW_LOADING, new Loading());
     }
 
     private Application getApplication() {

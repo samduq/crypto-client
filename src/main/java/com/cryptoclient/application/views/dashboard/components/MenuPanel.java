@@ -7,9 +7,11 @@ public class MenuPanel extends JPanel {
 
     private CryptoSubmenu cryptoSubmenu;
     private ProfileSubmenu profileSubmenu;
+    private int width;
 
-    public MenuPanel() {
+    public MenuPanel(int width) {
         this.setLayout(new BorderLayout());
+        this.setPreferredSize(new Dimension(width, 0));
 
         // Set submenus
         this.setCryptoSubmenu(new CryptoSubmenu(new DefaultListModel<>()));

@@ -10,10 +10,20 @@ public class Dashboard extends View {
 
     private MenuPanel menu;
     private Content content;
+    private int menuBarWidth;
 
     public Dashboard() {
-        this.setMenu(new MenuPanel());
+        this.setMenuBarWidth(250);
+        this.setMenu(new MenuPanel(this.getMenuBarWidth()));
         this.setContent(new Content());
+    }
+
+    public int getMenuBarWidth() {
+        return menuBarWidth;
+    }
+
+    public void setMenuBarWidth(int menuBarWidth) {
+        this.menuBarWidth = menuBarWidth;
     }
 
     public MenuPanel getMenu() {
