@@ -3,11 +3,14 @@ package com.cryptoclient.application.views.dashboard.components;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.time.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.Instant;
+import java.util.Date;
 
 public class Content extends JPanel {
 
@@ -22,20 +25,40 @@ public class Content extends JPanel {
         this.getContentTitle().setFont(new Font("Arial", Font.PLAIN, 20));
         this.getContentTitle().setHorizontalAlignment(JLabel.CENTER);
         this.add(this.getContentTitle(), BorderLayout.CENTER);
-
-        // Chart
-        //this.loadChartPanel();
     }
 
-    public JFreeChart createChart() {
+    private JFreeChart createChart(String cryptocurrencyName, JSONArray data) {
+
+        // TODO: periods; hours, days or second?
+
         TimeSeriesCollection dataset = new TimeSeriesCollection();
-        TimeSeries series = new TimeSeries("Cours de la crypto");
+        TimeSeries series = new TimeSeries("Cours de la crypto monnaie : " + cryptocurrencyName);
+
+        for (int i = 0; i < data.length(); i++) {
+            // Get the JSONObject
+            JSONObject obj = data.getJSONObject(i);
+
+            // Create the RegularTimePeriod corresponding
+            String time = obj.getString("time_close");
+            Instant instant = Instant.parse(time);
+            Date date = Date.from(instant);
+            RegularTimePeriod period = new Hour(date);
+
+            // Get the price
+            double price = obj.getDouble("rate_close");
+
+            // Add data to the TS
+            series.add(period, price);
+        }
+
+        //TimeSeriesCollection dataset = new TimeSeriesCollection(series);
         dataset.addSeries(series);
+
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
                 "Cours de la crypto", // title
-                "Temps", // x
-                "Prix", // y
-                dataset, // Data
+                "Temps", // x label
+                "Prix", // y label
+                dataset, // data
                 true, // Legend
                 true, // Tooltips
                 false // URL
@@ -43,9 +66,13 @@ public class Content extends JPanel {
         return chart;
     }
 
-    public void loadChartPanel() {
-        this.setChartPanel(new ChartPanel(this.createChart()));
+    public void loadChartPanel(String cryptocurrencyName, JSONArray data) {
+        this.setChartPanel(new ChartPanel(this.createChart(cryptocurrencyName, data)));
         this.add(this.getChartPanel(), BorderLayout.SOUTH);
+
+        // Reload content component
+        this.revalidate();
+        this.repaint();
     }
 
     public ChartPanel getChartPanel() {

@@ -4,6 +4,8 @@ import com.cryptoclient.application.Application;
 import com.cryptoclient.application.views.dashboard.Dashboard;
 import com.cryptoclient.listener.ViewListener;
 import com.cryptoclient.networking.Connection;
+import com.cryptoclient.networking.packets.headers.OutgoingHeaders;
+import org.json.JSONObject;
 
 public class DashboardListener extends ViewListener<Dashboard> {
 
@@ -20,7 +22,13 @@ public class DashboardListener extends ViewListener<Dashboard> {
         this.getView().getMenu().getCryptoSubmenu().getCryptocurrenciesItems().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 String selectedCryptocurrency = getView().getMenu().getCryptoSubmenu().getCryptocurrenciesItems().getSelectedValue();
-                System.out.println(selectedCryptocurrency);
+
+                // Prepare the request to the server
+                JSONObject packet = new JSONObject();
+                packet.put("header", OutgoingHeaders.DASHBOARD_SELECT_CRYPTO_REQUEST);
+                packet.put("cryptoName", selectedCryptocurrency);
+
+                this.getConnection().sendPacket(packet);
             }
         });
     }

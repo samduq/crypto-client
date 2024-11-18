@@ -37,7 +37,7 @@ public class ViewManager {
 
     public void displayView(String viewName) {
 
-        // Make all views invisible
+        // Make all visible views invisible
         for (View view : this.getViews().values()) {
             if (view.isVisible()) {
                 view.setVisible(false);
@@ -47,7 +47,7 @@ public class ViewManager {
         // Empty content pane
         this.getApplication().getContentPane().removeAll();
 
-
+        // Display the view
         if (this.getViews().containsKey(viewName)) {
             // Get the view
             View view = this.getViews().get(viewName);
