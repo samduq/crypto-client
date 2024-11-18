@@ -67,6 +67,12 @@ public class Content extends JPanel {
     }
 
     public void loadChartPanel(String cryptocurrencyName, JSONArray data) {
+
+        if (this.getChartPanel() != null) {
+            this.getChartPanel().setVisible(false);
+            this.remove(this.getChartPanel());
+        }
+
         this.setChartPanel(new ChartPanel(this.createChart(cryptocurrencyName, data)));
         this.add(this.getChartPanel(), BorderLayout.SOUTH);
 
