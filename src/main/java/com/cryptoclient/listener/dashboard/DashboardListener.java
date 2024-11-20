@@ -2,10 +2,14 @@ package com.cryptoclient.listener.dashboard;
 
 import com.cryptoclient.application.Application;
 import com.cryptoclient.application.views.dashboard.Dashboard;
+import com.cryptoclient.config.Configuration;
 import com.cryptoclient.listener.ViewListener;
 import com.cryptoclient.networking.Connection;
 import com.cryptoclient.networking.packets.headers.OutgoingHeaders;
 import org.json.JSONObject;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class DashboardListener extends ViewListener<Dashboard> {
 
@@ -16,6 +20,7 @@ public class DashboardListener extends ViewListener<Dashboard> {
     @Override
     public void listen() {
         listenCryptocurrencySelection();
+        listenLogout() ;
     }
 
     private void listenCryptocurrencySelection() {
@@ -32,4 +37,14 @@ public class DashboardListener extends ViewListener<Dashboard> {
             }
         });
     }
+
+    private void listenLogout() {
+        this.getView().getMenu().getProfileSubmenu().getLogoutButton().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                getApp().getViewManager().displayView(Configuration.VIEW_LOGIN);
+            }
+        });
+    }
 }
+
