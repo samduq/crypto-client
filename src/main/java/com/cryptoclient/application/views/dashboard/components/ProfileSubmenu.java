@@ -1,6 +1,7 @@
 package com.cryptoclient.application.views.dashboard.components;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ProfileSubmenu extends JPanel {
 
@@ -10,16 +11,31 @@ public class ProfileSubmenu extends JPanel {
 
     public ProfileSubmenu() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(new Color(40, 43, 45));
 
-        // Set buttons
-        this.setProfileButton(new JButton("Mon profil"));
-        this.setEditProfileButton(new JButton("Édition"));
-        this.setLogoutButton(new JButton("Déconnexion"));
+        // Boutons stylisés
+        this.setProfileButton(createStyledButton("Mon profil"));
+        this.setEditProfileButton(createStyledButton("Édition"));
+        this.setLogoutButton(createStyledButton("Déconnexion"));
 
-        // Add them
+        // Ajouter les boutons
+        this.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
         this.add(this.getProfileButton());
+        this.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
         this.add(this.getEditProfileButton());
+        this.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
         this.add(this.getLogoutButton());
+    }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.PLAIN, 14));
+        button.setBackground(new Color(70, 130, 180));
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return button;
     }
 
     public JButton getProfileButton() {

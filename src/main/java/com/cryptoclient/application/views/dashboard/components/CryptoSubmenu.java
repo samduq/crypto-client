@@ -11,9 +11,12 @@ public class CryptoSubmenu extends JPanel {
 
     public CryptoSubmenu(DefaultListModel<String> cryptocurrenciesName) {
         this.setCryptocurrenciesName(cryptocurrenciesName);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
+        this.setBackground(new Color(40, 43, 45));
+
+        // Initialiser la liste
         this.setCryptocurrenciesItems(new JList<>());
-        //this.loadItems();
+        this.loadItems();
     }
 
     public JScrollPane getListScroller() {
@@ -36,11 +39,13 @@ public class CryptoSubmenu extends JPanel {
         this.getCryptocurrenciesItems().setModel(this.getCryptocurrenciesName());
         this.getCryptocurrenciesItems().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.getCryptocurrenciesItems().setFont(new Font("Arial", Font.PLAIN, 17));
-        this.getCryptocurrenciesItems().setBackground(Color.WHITE);
-        this.getCryptocurrenciesItems().setForeground(Color.BLACK);
+        this.getCryptocurrenciesItems().setBackground(new Color(50, 53, 55));
+        this.getCryptocurrenciesItems().setForeground(Color.WHITE);
 
+        // Définir un JScrollPane pour la liste
         this.setListScroller(new JScrollPane(this.getCryptocurrenciesItems()));
-        this.add(this.getListScroller());
+        this.setLayout(new BorderLayout());
+        this.add(this.getListScroller(), BorderLayout.CENTER);
     }
 
     public DefaultListModel<String> getCryptocurrenciesName() {

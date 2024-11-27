@@ -7,32 +7,45 @@ import java.awt.event.FocusEvent;
 
 public class UsernameField extends JTextField {
 
-    private Color placeHolderColor = new Color(191, 191, 191);
+    private final Color placeHolderColor = new Color(180, 180, 180);
+    private final Color borderColorFocused = new Color(85, 255, 255);
+    private final Color borderColorDefault = new Color(100, 100, 100);
 
     public UsernameField(String placeHolder, int columns, int textSize) {
         super(columns);
-        //this.setFocusable(false);
         this.setFont(new Font("Arial", Font.PLAIN, textSize));
-        this.setBackground(new Color(133, 122, 129));
-        this.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        this.setBackground(new Color(240, 240, 240)); // Light background
         this.setForeground(placeHolderColor);
         this.setText(placeHolder);
+        this.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(borderColorDefault, 2),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+        ));
 
+        // Focus effects
         this.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (getText().equals(placeHolder)) {
                     setText("");
-                    setForeground(Color.WHITE);
+                    setForeground(Color.DARK_GRAY);
                 }
+                setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(borderColorFocused, 2),
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                ));
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (getText().isEmpty()) {
-                    setForeground(placeHolderColor);
                     setText(placeHolder);
+                    setForeground(placeHolderColor);
                 }
+                setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(borderColorDefault, 2),
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                ));
             }
         });
     }
