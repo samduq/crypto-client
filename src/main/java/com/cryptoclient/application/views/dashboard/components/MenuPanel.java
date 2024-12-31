@@ -13,11 +13,14 @@ public class MenuPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(width, 0));
 
-        // Set submenus
+        // Dégradé pour l'arrière-plan
+        this.setBackground(new Color(45, 50, 65));
+
+        // Initialiser les sous-menus
         this.setCryptoSubmenu(new CryptoSubmenu(new DefaultListModel<>()));
         this.setProfileSubmenu(new ProfileSubmenu());
 
-        // Add them to the main menu
+        // Ajouter les sous-menus
         this.add(this.getCryptoSubmenu(), BorderLayout.CENTER);
         this.add(this.getProfileSubmenu(), BorderLayout.SOUTH);
     }

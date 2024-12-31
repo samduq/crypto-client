@@ -4,6 +4,7 @@ import com.cryptoclient.application.views.dashboard.Dashboard;
 import com.cryptoclient.application.views.index.login.Login;
 import com.cryptoclient.application.views.index.register.Register;
 import com.cryptoclient.application.views.loading.Loading;
+import com.cryptoclient.application.views.registrationfailed.Registrationfailed;
 import com.cryptoclient.config.Configuration;
 import com.cryptoclient.application.Application;
 
@@ -25,6 +26,7 @@ public class ViewManager {
         this.getViews().put(Configuration.VIEW_REGISTER, new Register());
         this.getViews().put(Configuration.VIEW_DASHBOARD, new Dashboard());
         this.getViews().put(Configuration.VIEW_LOADING, new Loading());
+        this.getViews().put(Configuration.VIEW_REGISTRATIONFAILED, new Registrationfailed());
     }
 
     private Application getApplication() {
@@ -36,25 +38,28 @@ public class ViewManager {
     }
 
     public void displayView(String viewName) {
-
-        // Make all visible views invisible
+        // Rendre toutes les vues invisibles
         for (View view : this.getViews().values()) {
             if (view.isVisible()) {
                 view.setVisible(false);
             }
         }
 
-        // Empty content pane
+        // Vider le conteneur principal
         this.getApplication().getContentPane().removeAll();
 
-        // Display the view
+        // Afficher la vue demandée
         if (this.getViews().containsKey(viewName)) {
-            // Get the view
             View view = this.getViews().get(viewName);
             view.loadComponents();
-            // Show it
             this.getApplication().getContentPane().add(view);
             view.setVisible(true);
+        }
+    }
+
+    public void reloadAllViews() {
+        for (View view : this.getViews().values()) {
+            view.loadComponents();
         }
     }
 }
