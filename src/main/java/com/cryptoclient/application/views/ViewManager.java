@@ -38,25 +38,28 @@ public class ViewManager {
     }
 
     public void displayView(String viewName) {
-
-        // Make all visible views invisible
+        // Rendre toutes les vues invisibles
         for (View view : this.getViews().values()) {
             if (view.isVisible()) {
                 view.setVisible(false);
             }
         }
 
-        // Empty content pane
+        // Vider le conteneur principal
         this.getApplication().getContentPane().removeAll();
 
-        // Display the view
+        // Afficher la vue demandée
         if (this.getViews().containsKey(viewName)) {
-            // Get the view
             View view = this.getViews().get(viewName);
             view.loadComponents();
-            // Show it
             this.getApplication().getContentPane().add(view);
             view.setVisible(true);
+        }
+    }
+
+    public void reloadAllViews() {
+        for (View view : this.getViews().values()) {
+            view.loadComponents();
         }
     }
 }

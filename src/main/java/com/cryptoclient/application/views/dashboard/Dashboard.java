@@ -16,6 +16,7 @@ public class Dashboard extends View {
         this.setMenuBarWidth(250);
         this.setMenu(new MenuPanel(this.getMenuBarWidth()));
         this.setContent(new Content());
+        this.loadComponents();
     }
 
     public int getMenuBarWidth() {
@@ -44,10 +45,7 @@ public class Dashboard extends View {
 
     @Override
     public void loadComponents() {
-
         this.setLayout(new BorderLayout());
-
-        // Dégradé d'arrière-plan pour le tableau de bord
         this.setBackground(new Color(45, 50, 65));
 
         // Ajouter les composants principaux
